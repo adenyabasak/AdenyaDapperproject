@@ -1,0 +1,73 @@
+﻿@model List<AdenyaDapperProject.Models.JobModel>
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold display-5">
+            Son İş İlanları
+        </h2>
+
+        <p class="text-muted">
+            Platforma eklenen en güncel freelance iş ilanları
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model.Take(6))
+        {
+            <div class="col-lg-4 mb-4">
+
+                <div class="premium-job-card">
+
+                    <div class="job-top">
+
+                        <div class="job-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+
+                        <div>
+
+                            <h5>@item.Title</h5>
+
+                            <small class="text-muted">
+                                @item.CategoryName
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <p class="mt-4 text-muted">
+
+                        @item.Description
+
+                    </p>
+
+                    <div class="job-footer">
+
+                        <span class="price">
+
+                            @item.Budget.ToString("N0") ₺
+
+                        </span>
+
+                        <a href="/Bid/Create"
+                           class="btn btn-primary">
+
+                            Teklif Ver
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</section>

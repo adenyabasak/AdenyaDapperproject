@@ -1,0 +1,33 @@
+﻿@model AdenyaDapperProject.Models.UserModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Yeni Kullanıcı Ekle</h2>
+
+<form method="post">
+    <label>Ad Soyad</label>
+    <input type="text" asp-for="FullName" class="form-control" />
+
+    <br />
+
+    <label>Email</label>
+    <input type="email" asp-for="Email" class="form-control" />
+
+    <br />
+
+    <label>Şifre</label>
+    <input type="text" asp-for="Password" class="form-control" />
+
+    <br />
+
+    <label>Rol</label>
+    <select asp-for="Role" class="form-control">
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+    </select>
+
+    <br />
+
+    <button class="btn btn-success">Kaydet</button>
+</form>

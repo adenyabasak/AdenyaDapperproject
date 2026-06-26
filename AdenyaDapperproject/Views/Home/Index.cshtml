@@ -1,0 +1,15 @@
+﻿@model List<AdenyaDapperProject.Models.JobModel>
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@await Html.PartialAsync("~/Views/Shared/HomePartials/_Hero.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/HomePartials/_Statistics.cshtml", Model)
+
+@await Html.PartialAsync("~/Views/Shared/HomePartials/_LatestJobs.cshtml", Model)
+
+@await Html.PartialAsync("~/Views/Shared/HomePartials/_Features.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/HomePartials/_CallToAction.cshtml")

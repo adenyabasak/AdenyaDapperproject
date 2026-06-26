@@ -1,0 +1,24 @@
+﻿@model AdenyaDapperProject.Models.UserModel
+
+<h2>Giriş Yap</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form method="post">
+    <label>Email</label>
+    <input type="email" asp-for="Email" class="form-control" />
+
+    <br />
+
+    <label>Şifre</label>
+    <input type="password" asp-for="Password" class="form-control" />
+
+    <br />
+
+    <button class="btn btn-success">Giriş Yap</button>
+</form>

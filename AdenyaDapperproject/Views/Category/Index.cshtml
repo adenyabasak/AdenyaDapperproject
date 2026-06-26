@@ -1,0 +1,35 @@
+﻿@model List<AdenyaDapperProject.Models.CategoryModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Kategori Listesi</h2>
+
+<a href="/Category/Create" class="btn btn-primary mb-3">Yeni Kategori Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kategori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryId</td>
+                <td>@item.CategoryName</td>
+                <td>
+                    <a href="/Category/Delete/@item.CategoryId" class="btn btn-danger">Sil</a>
+                </td>
+                <td>
+                    <a href="/Category/Edit/@item.CategoryId" class="btn btn-warning">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+﻿@model AdenyaDapperProject.Models.BidModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Teklif Güncelle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="BidId" />
+
+    <label>İş İlanı</label>
+    <select asp-for="JobId" asp-items="ViewBag.Jobs" class="form-control"></select>
+
+    <br />
+
+    <label>Kullanıcı</label>
+    <select asp-for="UserId" asp-items="ViewBag.Users" class="form-control"></select>
+
+    <br />
+
+    <label>Fiyat</label>
+    <input type="number" asp-for="Price" class="form-control" />
+
+    <br />
+
+    <label>Mesaj</label>
+    <input type="text" asp-for="Message" class="form-control" />
+
+    <br />
+
+    <button class="btn btn-success">Güncelle</button>
+</form>

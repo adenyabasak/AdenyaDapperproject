@@ -1,0 +1,16 @@
+﻿@model AdenyaDapperProject.Models.CategoryModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Kategori Güncelle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="CategoryId" />
+
+    <label>Kategori Adı</label>
+    <input type="text" asp-for="CategoryName" class="form-control" />
+
+    <br />
+
+    <button class="btn btn-success">Güncelle</button>
+</form>

@@ -1,0 +1,38 @@
+﻿@model AdenyaDapperProject.Models.JobModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>İş İlanı Güncelle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="JobId" />
+
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="form-control" />
+
+    <br />
+
+    <label>Açıklama</label>
+    <input type="text" asp-for="Description" class="form-control" />
+
+    <br />
+
+    <label>Bütçe</label>
+    <input type="number" asp-for="Budget" class="form-control" />
+
+    <br />
+
+    <label>Kategori</label>
+    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>
+
+    <br />
+
+    <label>Kullanıcı</label>
+    <select asp-for="UserId" asp-items="ViewBag.Users" class="form-control"></select>
+
+    <br />
+
+    <button class="btn btn-success">Güncelle</button>
+</form>

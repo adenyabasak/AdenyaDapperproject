@@ -1,0 +1,44 @@
+﻿@model List<AdenyaDapperProject.Models.BidModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Teklif Listesi</h2>
+
+<a href="/Bid/Create" class="btn btn-primary mb-3">Yeni Teklif Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>İş</th>
+            <th>Kullanıcı</th>
+            <th>Fiyat</th>
+            <th>Mesaj</th>
+            <th>Tarih</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BidId</td>
+                <td>@item.Title</td>
+                <td>@item.FullName</td>
+                <td>@item.Price</td>
+                <td>@item.Message</td>
+                <td>@item.BidDate.ToShortDateString()</td>
+                <td>
+                    <a href="/Bid/Delete/@item.BidId" class="btn btn-danger">Sil</a>
+                </td>
+                <td>
+                    <a href="/Bid/Edit/@item.BidId" class="btn btn-warning">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

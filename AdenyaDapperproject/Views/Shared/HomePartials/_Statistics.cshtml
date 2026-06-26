@@ -1,0 +1,31 @@
+﻿@model List<AdenyaDapperProject.Models.JobModel>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-wrapper">
+            <div class="stat-item">
+                <i class="bi bi-people"></i>
+                <h2>250+</h2>
+                <p>Kullanıcı</p>
+            </div>
+
+            <div class="stat-item">
+                <i class="bi bi-briefcase"></i>
+                <h2>@(Model == null ? 0 : Model.Count)+</h2>
+                <p>Aktif İş İlanı</p>
+            </div>
+
+            <div class="stat-item">
+                <i class="bi bi-cash-coin"></i>
+                <h2>900+</h2>
+                <p>Teklif</p>
+            </div>
+
+            <div class="stat-item">
+                <i class="bi bi-star"></i>
+                <h2>4.9</h2>
+                <p>Ortalama Puan</p>
+            </div>
+        </div>
+    </div>
+</section>

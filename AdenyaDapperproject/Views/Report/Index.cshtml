@@ -1,0 +1,250 @@
+﻿@model List<AdenyaDapperProject.Models.ReportModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var lastJobs = ViewBag.LastJobs as List<AdenyaDapperProject.Models.ReportModel>;
+    var lastBids = ViewBag.LastBids as List<AdenyaDapperProject.Models.ReportModel>;
+}
+
+<style>
+    .dashboard-title {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 22px;
+        padding: 24px;
+        color: white;
+        min-height: 150px;
+        box-shadow: 0 15px 35px rgba(15,23,42,.15);
+        transition: .25s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-6px);
+    }
+
+    .stat-blue {
+        background: linear-gradient(135deg, #2563eb, #38bdf8);
+    }
+
+    .stat-green {
+        background: linear-gradient(135deg, #16a34a, #4ade80);
+    }
+
+    .stat-purple {
+        background: linear-gradient(135deg, #7c3aed, #c084fc);
+    }
+
+    .stat-orange {
+        background: linear-gradient(135deg, #f97316, #facc15);
+    }
+
+    .stat-card i {
+        font-size: 34px;
+        opacity: .9;
+    }
+
+    .stat-card h6 {
+        margin-top: 15px;
+        opacity: .9;
+        font-weight: 600;
+    }
+
+    .stat-card h2 {
+        font-weight: 900;
+        margin: 0;
+    }
+
+    .dashboard-box {
+        background: white;
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 15px 35px rgba(15,23,42,.08);
+        height: 100%;
+    }
+
+    .dashboard-box h5 {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 18px;
+    }
+
+    .mini-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .mini-list:last-child {
+        border-bottom: none;
+    }
+
+    .badge-soft {
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+    }
+</style>
+
+<h2 class="dashboard-title">Yönetim Dashboard</h2>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="stat-card stat-blue">
+            <i class="bi bi-people"></i>
+            <h6>Toplam Kullanıcı</h6>
+            <h2>@ViewBag.TotalUsers</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card stat-green">
+            <i class="bi bi-briefcase"></i>
+            <h6>Toplam İş İlanı</h6>
+            <h2>@ViewBag.TotalJobs</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card stat-purple">
+            <i class="bi bi-trophy"></i>
+            <h6>En Çok Teklif Alan İş</h6>
+            <h4>@ViewBag.MostBidJobTitle</h4>
+            <small>@ViewBag.MostBidJobCount teklif</small>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card stat-orange">
+            <i class="bi bi-cash-stack"></i>
+            <h6>Ortalama Teklif</h6>
+            <h2>@ViewBag.AverageBid TL</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="dashboard-box">
+            <h5><i class="bi bi-grid"></i> Kategoriye Göre İş Sayısı</h5>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>İş Sayısı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CategoryName</td>
+                            <td><span class="badge-soft">@item.JobCount iş</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-box">
+            <h5><i class="bi bi-bar-chart"></i> Kategori Grafiği</h5>
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="dashboard-box">
+            <h5><i class="bi bi-clock-history"></i> Son Eklenen İşler</h5>
+
+            @if (lastJobs != null && lastJobs.Any())
+            {
+                foreach (var item in lastJobs)
+                {
+                    <div class="mini-list">
+                        <div>
+                            <strong>@item.Title</strong>
+                            <br />
+                            <small class="text-muted">Yeni iş ilanı</small>
+                        </div>
+                        <span class="badge-soft">@item.Budget TL</span>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">Henüz iş ilanı yok.</p>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-box">
+            <h5><i class="bi bi-chat-dots"></i> Son Teklifler</h5>
+
+            @if (lastBids != null && lastBids.Any())
+            {
+                foreach (var item in lastBids)
+                {
+                    <div class="mini-list">
+                        <div>
+                            <strong>@item.Message</strong>
+                            <br />
+                            <small class="text-muted">@item.BidDate.ToShortDateString()</small>
+                        </div>
+                        <span class="badge-soft">@item.Price TL</span>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">Henüz teklif yok.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var labels = [
+    @foreach (var item in Model)
+    {
+        @Html.Raw("'" + item.CategoryName + "',")
+    }
+    ];
+
+    var data = [
+    @foreach (var item in Model)
+    {
+        @Html.Raw(item.JobCount + ",")
+    }
+    ];
+
+    var ctx = document.getElementById('categoryChart');
+
+    new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    labels: labels,
+    datasets: [{
+    data: data
+    }]
+    }
+    });
+</script>

@@ -1,0 +1,70 @@
+﻿@model List<AdenyaDapperProject.Models.JobModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var role = Context.Session.GetString("Role");
+}
+
+<h2>İş İlanları</h2>
+<a href="/Job/ExportToExcel" class="btn btn-success mb-3">
+    Excel'e Aktar
+</a>
+
+<a href="/Job/ExportToPdf" class="btn btn-danger mb-3">
+    PDF'e Aktar
+</a>
+
+<form method="get" class="mb-3">
+    <input type="text" name="search" class="form-control" placeholder="İş başlığı ara..." />
+    <br />
+    <button class="btn btn-info">Ara</button>
+</form>
+
+@if (role == "Admin")
+{
+    <a href="/Job/Create" class="btn btn-primary mb-3">Yeni İş İlanı Ekle</a>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Bütçe</th>
+            <th>Kategori</th>
+            <th>Kullanıcı</th>
+
+            @if (role == "Admin")
+            {
+                <th>Sil</th>
+                <th>Güncelle</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.JobId</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Budget</td>
+                <td>@item.CategoryName</td>
+                <td>@item.FullName</td>
+                @if (role == "Admin")
+                {
+                    @if (role == "Admin")
+                    {
+                        <td>
+                            <a href="/Job/Delete/@item.JobId" class="btn btn-danger">Sil</a>
+                        </td>
+
+                        <td>
+                            <a href="/Job/Edit/@item.JobId" class="btn btn-warning">Güncelle</a>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
